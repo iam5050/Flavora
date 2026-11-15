@@ -15,4 +15,6 @@ A multi-page responsive website for Flavora, a cooking club for students and foo
 - CSS3, with responsive layouts using media queries
 
 ## View
-Open `index.html` in any browser.
+**Live site:** https://iam5050.github.io/Flavora/
+
+Or open `index.html` in any browser.
