@@ -7,6 +7,8 @@
    Manage Activity Leaders and Instructors | Flavora
   </title>
   <link href="style.css" rel="stylesheet">
+  <script src="theme.js" defer></script>
+  
  </head>
  <body>
   <header class="bar">
@@ -60,221 +62,15 @@
     <h2>
      Current Instructors &amp; Activity Leaders
     </h2>
-    <form action="#" method="post">
-     <div class="cards three">
-      <div class="person small">
-       <img alt="Photo of Sarah Ahmed" src="images/avatar-sarah-ahmed.svg">
-       <div class="pt">
-        <strong>
-         Sarah Ahmed
-        </strong>
-        <span>
-         Cooking Instructor
-        </span>
-        <span>
-         Italian Cuisine
-        </span>
-       </div>
-       <div class="acts">
-        <a class="btn small" href="instructor-profile.html">
-         View Profile
-        </a>
-        <label>
-         <input name="remove" type="checkbox" value="Sarah Ahmed">
-         Select
-        </label>
-       </div>
-      </div>
-      <div class="person small">
-       <img alt="Photo of Omar Ali" src="images/avatar-omar-ali.svg">
-       <div class="pt">
-        <strong>
-         Omar Ali
-        </strong>
-        <span>
-         Cooking Instructor
-        </span>
-        <span>
-         Asian Cuisine
-        </span>
-       </div>
-       <div class="acts">
-        <a class="btn small" href="instructor-profile.html">
-         View Profile
-        </a>
-        <label>
-         <input name="remove" type="checkbox" value="Omar Ali">
-         Select
-        </label>
-       </div>
-      </div>
-      <div class="person small">
-       <img alt="Photo of Lina Hassan" src="images/avatar-lina-hassan.svg">
-       <div class="pt">
-        <strong>
-         Lina Hassan
-        </strong>
-        <span>
-         Cooking Instructor
-        </span>
-        <span>
-         Pizza and Pasta
-        </span>
-       </div>
-       <div class="acts">
-        <a class="btn small" href="instructor-profile.html">
-         View Profile
-        </a>
-        <label>
-         <input name="remove" type="checkbox" value="Lina Hassan">
-         Select
-        </label>
-       </div>
-      </div>
-      <div class="person small">
-       <img alt="Photo of Maha Alharbi" src="images/avatar-maha-alharbi.svg">
-       <div class="pt">
-        <strong>
-         Maha Alharbi
-        </strong>
-        <span>
-         Cooking Instructor
-        </span>
-        <span>
-         Baking and Pastry
-        </span>
-       </div>
-       <div class="acts">
-        <a class="btn small" href="instructor-profile.html">
-         View Profile
-        </a>
-        <label>
-         <input name="remove" type="checkbox" value="Maha Alharbi">
-         Select
-        </label>
-       </div>
-      </div>
-      <div class="person small">
-       <img alt="Photo of Khalid Saad" src="images/avatar-khalid-saad.svg">
-       <div class="pt">
-        <strong>
-         Khalid Saad
-        </strong>
-        <span>
-         Cooking Instructor
-        </span>
-        <span>
-         Healthy Cooking
-        </span>
-       </div>
-       <div class="acts">
-        <a class="btn small" href="instructor-profile.html">
-         View Profile
-        </a>
-        <label>
-         <input name="remove" type="checkbox" value="Khalid Saad">
-         Select
-        </label>
-       </div>
-      </div>
-      <div class="person small">
-       <img alt="Photo of Reem Alotaibi" src="images/avatar-reem-alotaibi.svg">
-       <div class="pt">
-        <strong>
-         Reem Alotaibi
-        </strong>
-        <span>
-         Cooking Instructor
-        </span>
-        <span>
-         Desserts
-        </span>
-       </div>
-       <div class="acts">
-        <a class="btn small" href="instructor-profile.html">
-         View Profile
-        </a>
-        <label>
-         <input name="remove" type="checkbox" value="Reem Alotaibi">
-         Select
-        </label>
-       </div>
-      </div>
-      <div class="person small">
-       <img alt="Photo of Noura Alqahtani" src="images/avatar-noura-alqahtani.svg">
-       <div class="pt">
-        <strong>
-         Noura Alqahtani
-        </strong>
-        <span>
-         Cooking Instructor
-        </span>
-        <span>
-         Arabic Cuisine
-        </span>
-       </div>
-       <div class="acts">
-        <a class="btn small" href="instructor-profile.html">
-         View Profile
-        </a>
-        <label>
-         <input name="remove" type="checkbox" value="Noura Alqahtani">
-         Select
-        </label>
-       </div>
-      </div>
-      <div class="person small">
-       <img alt="Photo of Faisal Almutairi" src="images/avatar-faisal-almutairi.svg">
-       <div class="pt">
-        <strong>
-         Faisal Almutairi
-        </strong>
-        <span>
-         Cooking Instructor
-        </span>
-        <span>
-         Grilling and BBQ
-        </span>
-       </div>
-       <div class="acts">
-        <a class="btn small" href="instructor-profile.html">
-         View Profile
-        </a>
-        <label>
-         <input name="remove" type="checkbox" value="Faisal Almutairi">
-         Select
-        </label>
-       </div>
-      </div>
-      <div class="person small">
-       <img alt="Photo of Dana Khalil" src="images/avatar-dana-khalil.svg">
-       <div class="pt">
-        <strong>
-         Dana Khalil
-        </strong>
-        <span>
-         Cooking Instructor
-        </span>
-        <span>
-         Vegan Cooking
-        </span>
-       </div>
-       <div class="acts">
-        <a class="btn small" href="instructor-profile.html">
-         View Profile
-        </a>
-        <label>
-         <input name="remove" type="checkbox" value="Dana Khalil">
-         Select
-        </label>
-       </div>
-      </div>
+    <form action="#" method="post" id="deleteForm">
+     <div class="cards three" id="instructorList">
+      <!-- filled by JavaScript from an array of objects (scripti.js) -->
      </div>
      <div class="btn-row">
-      <button class="alt" type="submit">
+      <button class="alt" type="submit" id="deleteBtn">
        Delete
       </button>
-      <button class="alt" type="submit">
+      <button class="alt" type="button">
        Next Page ->
       </button>
      </div>
@@ -284,7 +80,7 @@
     <h2>
      Add a New Instructor or Activity Leader
     </h2>
-    <form action="#" class="form wide" method="post">
+    <form action="#" class="form wide" method="post" id="addForm">
      <div class="grid2">
       <div class="col">
        <label for="an">
@@ -408,5 +204,6 @@
     </div>
    </div>
   </footer>
+  <script src="scripti.js"></script>
  </body>
 </html>

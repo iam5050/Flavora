@@ -7,6 +7,8 @@
    Club Offerings | Flavora
   </title>
   <link href="style.css" rel="stylesheet">
+  <script src="theme.js" defer></script>
+  
  </head>
  <body>
   <header class="bar">
@@ -100,7 +102,7 @@
      </optgroup>
     </select>
    </div>
-   <div class="cards two">
+   <div class="cards two" id="offerings-container">
     <div class="offer h">
      <img alt="Italian Cooking Workshop" src="images/italian-pasta-workshop.svg">
      <div class="body">
@@ -204,16 +206,10 @@
      </a>
     </div>
    </div>
-   <nav aria-label="Pagination" class="pager">
-    <a href="#">
-     «1
-    </a>
-    <a href="#">
-     2
-    </a>
-    <a href="#">
-     »3
-    </a>
+   <nav aria-label="Pagination" class="pager" id="pagination">
+    <a href="#" data-page="1">1</a>
+    <a href="#" data-page="2">2</a>
+    <a href="#" data-page="3">3</a>
    </nav>
   </main>
   <footer class="bar foot">
@@ -278,5 +274,83 @@
     </div>
    </div>
   </footer>
+  
+<script>
+    const container = document.getElementById("offerings-container");
+    const offerings = Array.from(container.children);
+    const sortSelect = document.getElementById("sort");
+    const pageLinks = document.querySelectorAll("#pagination a");
+
+    const itemsPerPage = 2;
+    let currentPage = 1;
+
+    // Get the offering name and price.
+    function getName(offering) {
+        return offering.querySelector("h3").textContent.trim();
+    }
+
+    function getPrice(offering) {
+        const text = offering.querySelector(".meta").textContent;
+        return Number(text.split("$")[1]);
+    }
+
+    // Display only the offerings for the selected page.
+    function displayPage(page) {
+        currentPage = page;
+
+        offerings.forEach((offering, index) => {
+            const start = (page - 1) * itemsPerPage;
+            offering.style.display =
+                index >= start && index < start + itemsPerPage
+                    ? ""
+                    : "none";
+        });
+
+        pageLinks.forEach(link => {
+            const active = Number(link.dataset.page) === page;
+            link.setAttribute("aria-current", active ? "page" : "false");
+        });
+    }
+
+    // Randomize the initial order.
+    for (let i = offerings.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [offerings[i], offerings[j]] = [offerings[j], offerings[i]];
+    }
+
+    function updateOrder() {
+        offerings.forEach(offering => container.appendChild(offering));
+        displayPage(1);
+    }
+
+    // Sort offerings according to the selected option.
+    sortSelect.addEventListener("change", function () {
+        const option = this.value;
+
+        if (option === "name-asc") {
+            offerings.sort((a, b) => getName(a).localeCompare(getName(b)));
+        } else if (option === "name-desc") {
+            offerings.sort((a, b) => getName(b).localeCompare(getName(a)));
+        } else if (option === "price-asc") {
+            offerings.sort((a, b) => getPrice(a) - getPrice(b));
+        } else if (option === "price-desc") {
+            offerings.sort((a, b) => getPrice(b) - getPrice(a));
+        }
+
+        updateOrder();
+    });
+
+    // Handle pagination clicks.
+    pageLinks.forEach(link => {
+        link.addEventListener("click", function (event) {
+            event.preventDefault();
+            displayPage(Number(this.dataset.page));
+        });
+    });
+
+    // Display the randomized first page.
+    updateOrder();
+</script>
+
  </body>
 </html>

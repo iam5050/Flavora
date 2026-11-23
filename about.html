@@ -7,6 +7,7 @@
    About Us | Flavora
   </title>
   <link href="style.css" rel="stylesheet">
+  <script src="theme.js" defer></script>
  </head>
  <body>
   <header class="bar">
@@ -108,7 +109,7 @@
      <div class="person">
       <img alt="Photo of Sarah Ahmed" src="images/avatar-sarah-ahmed.svg">
       <div>
-       <a href="Instructor-profile.html">
+       <a href="instructor-profile.html">
         Sarah Ahmed
        </a>
        <p>
@@ -207,7 +208,7 @@
     </div>
    </section>
    <section id="join">
-    <form action="#" class="form wide" method="post">
+    <form action="#" class="form wide" method="post" id="joinTeamForm">
      <h2 class="center">
       Join Our Team
      </h2>
@@ -221,11 +222,18 @@
        <label for="jn">
         Name*
        </label>
-       <input id="jn" name="name" placeholder="Enter your full name here." required="" type="text">
+       <input id="jn" name="name"
+	   placeholder="Enter your full name here."
+       type="text" required
+       pattern="^[^0-9].*"
+       title="Name cannot start with a number">
        <label for="jd">
         Date of Birth*
        </label>
-       <input autocomplete="off" class="date" data-fmt="dmy" data-max="today" id="jd" inputmode="numeric" name="dob" required="" title="dd/mm/yyyy" max="2014-01-01" type="date">
+       <input autocomplete="off" class="date" data-fmt="dmy"
+       id="jd" name="dob" required
+       title="Date of birth must be in 2008 or earlier"
+       max="2008-12-31" type="date">
        <label for="je">
         Email*
        </label>
@@ -265,10 +273,12 @@
          Healthy cooking
         </option>
        </select>
-       <label for="jed">
-        Education
-       </label>
-       <textarea id="jed" name="education" placeholder="Enter your education here" rows="4"></textarea>
+         <label for="jed">
+		Education*
+		 </label>
+		<textarea id="jed" name="education"
+        placeholder="Enter your education here"
+        rows="4" required></textarea>
       </div>
      </div>
      <button class="right-btn" type="submit">
@@ -339,5 +349,48 @@
     </div>
    </div>
   </footer>
+  
+<script>
+    const joinTeamForm = document.getElementById("joinTeamForm");
+
+    joinTeamForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        // 1) Specialized form controls (required, pattern, max, accept)
+        if (!joinTeamForm.checkValidity()) {
+            joinTeamForm.reportValidity();
+            return;
+        }
+
+        const name = document.getElementById("jn").value.trim();
+        const dob = document.getElementById("jd").value;
+        const photo = document.getElementById("jp").files[0];
+
+        // 2) Extra JavaScript checks (in case the browser skips one)
+        const skills = document.getElementById("js").value.trim();
+        const education = document.getElementById("jed").value.trim();
+        if (name === "" || skills === "" || education === "") {
+            alert("Please fill in all fields (spaces only are not accepted).");
+            return;
+        }
+        if (/^[0-9]/.test(name)) {
+            alert("Name cannot start with a number.");
+            return;
+        }
+        if (!photo || !photo.type.startsWith("image/")) {
+            alert("Profile Picture must be an image file.");
+            return;
+        }
+        if (Number(dob.split("-")[0]) > 2008) {
+            alert("Year of birth must be 2008 or earlier.");
+            return;
+        }
+
+        alert("Thank you, " + name + "! Your application has been submitted successfully.");
+
+        joinTeamForm.reset();
+    });
+</script>
+
  </body>
 </html>

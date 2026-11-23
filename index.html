@@ -7,8 +7,12 @@
    Home | Flavora
   </title>
   <link href="style.css" rel="stylesheet">
+  <script src="theme.js" defer></script>
  </head>
  <body>
+  <button id="themeToggle" type="button" onclick="toggleTheme()">
+    Switch to Dark Theme
+</button>
   <header class="bar">
    <a class="brand" href="index.html">
     <img alt="Flavora logo" src="images/flavora-logo.jpg">
@@ -180,12 +184,40 @@
      <p>
       Try our easy Creamy Garlic Pasta, shared by one of our members.
      </p>
-     <a class="btn" href="index.html#contact">
-      View recipe →
-     </a>
+     <button class="btn" id="recipeToggle" type="button"
+        aria-expanded="false" aria-controls="recipe">
+    View Recipe
+	</button>
     </div>
     <img alt="Creamy garlic pasta" src="images/recipe-creamy-garlic-pasta.svg">
    </section>
+   
+   
+   <section id="recipe" hidden>
+  <h2>Creamy Garlic Pasta Recipe</h2>
+
+  <h3>Ingredients</h3>
+  <ul>
+    <li>200g pasta</li>
+    <li>3 garlic cloves, minced</li>
+    <li>1 tablespoon butter</li>
+    <li>1 cup cooking cream</li>
+    <li>Salt and pepper to taste</li>
+    <li>Grated Parmesan cheese</li>
+  </ul>
+
+  <h3>Instructions</h3>
+  <ol>
+    <li>Cook the pasta according to package instructions.</li>
+    <li>Melt butter in a pan and sauté the garlic.</li>
+    <li>Add cooking cream and stir until combined.</li>
+    <li>Season with salt and pepper.</li>
+    <li>Add the cooked pasta and mix well.</li>
+    <li>Serve with grated Parmesan cheese.</li>
+  </ol>
+</section>
+   
+   
    <section id="contact">
     <form action="#" class="form wide" method="post">
      <h2 class="center">
@@ -270,6 +302,63 @@
      </a>
     </div>
    </div>
+   <p id="footerClock"></p>
   </footer>
+  
+<script>
+    const recipeToggle = document.getElementById("recipeToggle");
+    const recipe = document.getElementById("recipe");
+
+    recipeToggle.addEventListener("click", function () {
+        recipe.hidden = !recipe.hidden;
+
+        const isExpanded = !recipe.hidden;
+
+        recipeToggle.textContent = isExpanded
+            ? "Hide Recipe"
+            : "View Recipe";
+
+        recipeToggle.setAttribute("aria-expanded", isExpanded);
+    });
+</script>
+
+<button id="backToTop" type="button" aria-label="Back to top">
+    ↑
+</button>
+
+
+
+<script>
+    const backToTop = document.getElementById("backToTop");
+
+    window.addEventListener("scroll", function () {
+        if (window.scrollY > 200) {
+            backToTop.style.display = "block";
+        } else {
+            backToTop.style.display = "none";
+        }
+    });
+
+    backToTop.addEventListener("click", function () {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+</script>
+
+
+<script>
+    function updateClock() {
+        const now = new Date();
+
+        document.getElementById("footerClock").textContent =
+            now.toLocaleTimeString();
+    }
+
+    updateClock();
+    setInterval(updateClock, 1000);
+</script>
+
  </body>
 </html>

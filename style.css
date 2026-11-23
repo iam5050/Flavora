@@ -6,6 +6,131 @@
     --line: #d9e1d6;
 }
 
+
+/* High Contrast Dark Theme */
+
+html[data-theme="dark"] {
+    color-scheme: dark;
+
+    --ink: #ffffff;
+    --green: #1b5e45;
+    --gold: #ffd966;
+    --paper: #121212;
+    --line: #888888;
+}
+
+html[data-theme="dark"] .offer,
+html[data-theme="dark"] .review,
+html[data-theme="dark"] .person,
+html[data-theme="dark"] .form,
+html[data-theme="dark"] .info,
+html[data-theme="dark"] .links,
+html[data-theme="dark"] .mini,
+html[data-theme="dark"] .stats div,
+html[data-theme="dark"] table {
+    background: #242424;
+}
+
+html[data-theme="dark"] a:not(.btn) {
+    color: #ffe08a;
+}
+
+html[data-theme="dark"] .bar a,
+html[data-theme="dark"] .foot a {
+    color: #ffffff;
+}
+
+html[data-theme="dark"] .btn,
+html[data-theme="dark"] button:not(.arrow) {
+    background: #ffd966;
+    color: #121212;
+}
+
+html[data-theme="dark"] input,
+html[data-theme="dark"] select,
+html[data-theme="dark"] textarea {
+    background: #242424;
+    color: #ffffff;
+    border-color: #aaaaaa;
+}
+
+
+/* Managing Contrast */
+
+html[data-theme="dark"] .boxed,
+html[data-theme="dark"] .dropdown,
+html[data-theme="dark"] .searchbar,
+html[data-theme="dark"] .pager a,
+html[data-theme="dark"] .pager span {
+    background: #242424;
+    color: #ffffff;
+    border-color: #888888;
+}
+
+html[data-theme="dark"] .tag {
+    color: #ffd966;
+}
+
+html[data-theme="dark"] .menu .dropdown a {
+    color: #ffffff;
+}
+
+html[data-theme="dark"] .extra {
+    background: #ffd966;
+    color: #121212;
+    border-left-color: #ffffff;
+}
+
+html[data-theme="dark"] .extra h2,
+html[data-theme="dark"] .extra h3,
+html[data-theme="dark"] .extra p {
+    color: #121212;
+}
+
+html[data-theme="dark"] .extra a:not(.btn) {
+    color: #163d30;
+}
+
+html[data-theme="dark"] .btn.alt,
+html[data-theme="dark"] button.alt {
+    background: #ffd966;
+    color: #121212;
+    border: 2px solid #121212;
+}
+
+html[data-theme="dark"] .extra .btn.alt {
+    background: #121212;
+    color: #ffffff;
+    border: 2px solid #121212;
+}
+
+html[data-theme="dark"] .btn.alt:hover,
+html[data-theme="dark"] button.alt:hover {
+    background: #ffe8a3;
+    color: #121212;
+}
+
+html[data-theme="dark"] .social a {
+    background: #ffffff;
+    color: #121212;
+    border: 2px solid #ffffff;
+}
+
+html[data-theme="dark"] .social a:hover,
+html[data-theme="dark"] .social a:focus-visible {
+    background: #ffd966;
+    color: #121212;
+    border-color: #ffd966;
+}
+
+html[data-theme="dark"] .social a svg {
+    stroke: currentColor;
+}
+
+
+
+
+
 * {
     box-sizing: border-box;
 }
@@ -175,7 +300,7 @@ a {
 
 .btn.alt {
     background: var(--gold);
-    color: var(--ink);
+    color: #1e2a22;
 }
 
 .btn:hover, button:hover {
@@ -428,7 +553,7 @@ table {
 
 button.alt {
     background: var(--gold);
-    color: var(--ink);
+    color: #1e2a22;
 }
 
 .rate {
@@ -1345,4 +1470,102 @@ p.sr, .sr {
         flex: 0 1 auto;
         max-width: min(75%, 300px);
     }
+}
+
+#themeToggle {
+    display: block;
+    margin: 1rem auto;
+    padding: .7rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+
+/*Back to Top Button */
+
+#backToTop {
+    display: none;
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 100;
+    background: var(--green);
+    color: #ffffff;
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+#backToTop:hover {
+    background: var(--gold);
+    color: #121212;
+}
+
+/* Dark theme */
+html[data-theme="dark"] #backToTop {
+    background: #ffd966;
+    color: #121212;
+    border-color: #ffffff;
+}
+
+/* Managing Mobile Responsiveness */
+
+@media (max-width: 600px) {
+
+    /* Header and navigation */
+    .bar {
+        justify-content: center;
+    }
+
+    .menu {
+        justify-content: center;
+        width: 100%;
+    }
+
+    /* Featured offerings */
+    .cards > .offer {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    /* Recipe section */
+    .extra {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .extra img {
+        max-width: 100%;
+        width: 250px;
+        height: auto;
+    }
+
+    /* Footer */
+    .foot {
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .foot .fr {
+        text-align: center;
+    }
+
+    .social {
+        justify-content: center;
+    }
+}
+
+[hidden] {
+    display: none !important;
+}
+
+/* Responsive images on all pages */
+img {
+    max-width: 100%;
+    height: auto;
 }
