@@ -7,7 +7,7 @@
    Manage Activity Leaders and Instructors | Flavora
   </title>
   <link href="style.css" rel="stylesheet">
-  <script src="theme.js" defer></script>
+  <script src="theme.js"></script>
   
  </head>
  <body>
@@ -64,14 +64,10 @@
     </h2>
     <form action="#" method="post" id="deleteForm">
      <div class="cards three" id="instructorList">
-      <!-- filled by JavaScript from an array of objects (scripti.js) -->
      </div>
      <div class="btn-row">
       <button class="alt" type="submit" id="deleteBtn">
        Delete
-      </button>
-      <button class="alt" type="button">
-       Next Page ->
       </button>
      </div>
     </form>
@@ -90,7 +86,7 @@
        <label for="ad">
         Date of Birth*
        </label>
-       <input autocomplete="off" class="date" data-fmt="dmy" data-max="today" id="ad" inputmode="numeric" name="dob"  required="" title="dd/mm/yyyy" type="date">
+       <input autocomplete="off" class="date" data-fmt="dmy" id="ad" inputmode="numeric" name="dob"  required="" max="2008-12-31" title="dd/mm/yyyy" type="date">
        <label for="as">
         Skills*
        </label>

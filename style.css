@@ -6,19 +6,20 @@
     --line: #d9e1d6;
 }
 
-
-/* High Contrast Dark Theme */
-
 html[data-theme="dark"] {
     color-scheme: dark;
-
-    --ink: #ffffff;
-    --green: #1b5e45;
-    --gold: #ffd966;
-    --paper: #121212;
-    --line: #888888;
+    --ink: #e6ebe7;      
+    --muted: #a8b4ab;    
+    --green: #245c45;    
+    --gold: #e8b84a;     
+    --paper: #131a16;   
+    --line: #2f3d35;      
+    --surface: #1b241f;  
+    --surface-2: #232e28;
+    --edge: #455549;      
 }
 
+/* Cards and boxes */
 html[data-theme="dark"] .offer,
 html[data-theme="dark"] .review,
 html[data-theme="dark"] .person,
@@ -27,108 +28,208 @@ html[data-theme="dark"] .info,
 html[data-theme="dark"] .links,
 html[data-theme="dark"] .mini,
 html[data-theme="dark"] .stats div,
+html[data-theme="dark"] .boxed,
+html[data-theme="dark"] .dropdown,
+html[data-theme="dark"] .dp,
+html[data-theme="dark"] .pager a,
+html[data-theme="dark"] .pager span,
 html[data-theme="dark"] table {
-    background: #242424;
+    background: var(--surface);
+    color: var(--ink);
+    border-color: var(--line);
 }
 
+html[data-theme="dark"] .boxed {
+    border-color: var(--edge);
+}
+
+html[data-theme="dark"] .offer:hover {
+    border-color: var(--gold);
+}
+
+html[data-theme="dark"] .inner h2 {
+    border-bottom-color: var(--edge);
+}
+
+/* Text and links */
 html[data-theme="dark"] a:not(.btn) {
-    color: #ffe08a;
+    color: #9bd8b6;
+}
+
+html[data-theme="dark"] a:not(.btn):hover {
+    color: var(--gold);
 }
 
 html[data-theme="dark"] .bar a,
 html[data-theme="dark"] .foot a {
-    color: #ffffff;
+    color: #f1f5f2;
 }
 
-html[data-theme="dark"] .btn,
-html[data-theme="dark"] button:not(.arrow) {
-    background: #ffd966;
-    color: #121212;
-}
-
-html[data-theme="dark"] input,
-html[data-theme="dark"] select,
-html[data-theme="dark"] textarea {
-    background: #242424;
-    color: #ffffff;
-    border-color: #aaaaaa;
-}
-
-
-/* Managing Contrast */
-
-html[data-theme="dark"] .boxed,
-html[data-theme="dark"] .dropdown,
-html[data-theme="dark"] .searchbar,
-html[data-theme="dark"] .pager a,
-html[data-theme="dark"] .pager span {
-    background: #242424;
-    color: #ffffff;
-    border-color: #888888;
+html[data-theme="dark"] .bar a:hover,
+html[data-theme="dark"] .bar a:focus,
+html[data-theme="dark"] .foot a:hover {
+    color: var(--gold);
 }
 
 html[data-theme="dark"] .tag {
-    color: #ffd966;
+    color: var(--gold);
 }
 
-html[data-theme="dark"] .menu .dropdown a {
+html[data-theme="dark"] .stars {
+    color: var(--gold);
+}
+
+/* Buttons: green by default, gold on hover (alt buttons stay gold) */
+html[data-theme="dark"] :where(.btn, button:not(.arrow)) {
+    background: #2a7d5b;
     color: #ffffff;
 }
 
+html[data-theme="dark"] :where(.btn, button:not(.arrow)):hover {
+    background: var(--gold);
+    color: #14201a;
+}
+
+html[data-theme="dark"] .btn.alt:hover,
+html[data-theme="dark"] button.alt:hover {
+    background: #f2c96b;
+    color: #14201a;
+}
+
+html[data-theme="dark"] .arrow {
+    color: var(--muted);
+}
+
+html[data-theme="dark"] .arrow:hover,
+html[data-theme="dark"] .arrow:focus-visible {
+    background: var(--line);
+    color: var(--ink);
+}
+
+/* Form controls */
+html[data-theme="dark"] input,
+html[data-theme="dark"] select,
+html[data-theme="dark"] textarea {
+    background: var(--surface-2);
+    color: var(--ink);
+    border-color: var(--edge);
+}
+
+html[data-theme="dark"] ::placeholder {
+    color: var(--muted);
+    opacity: 1;
+}
+
+html[data-theme="dark"] .form .upload {
+    background: var(--surface-2);
+    border-color: var(--edge);
+    color: var(--muted);
+}
+
+html[data-theme="dark"] .searchbar {
+    background: var(--surface-2);
+    border-color: var(--edge);
+    color: var(--muted);
+}
+
+html[data-theme="dark"] .searchbar input {
+    background: transparent;
+    border: 0;
+}
+
+html[data-theme="dark"] .withicon svg {
+    color: var(--muted);
+}
+
+html[data-theme="dark"] .rate label {
+    color: #5b6b61;
+}
+
+html[data-theme="dark"] :focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+}
+
+html[data-theme="dark"] .searchbar:focus-within {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 2px rgba(232, 184, 74, .25);
+}
+
+/* Tables */
+html[data-theme="dark"] .profile th[scope=row] {
+    background: var(--surface-2);
+}
+
+html[data-theme="dark"] .tags li {
+    background: var(--surface-2);
+    color: var(--ink);
+}
+
+/* Dropdown menu */
+html[data-theme="dark"] .menu .dropdown a {
+    color: var(--ink);
+}
+
+html[data-theme="dark"] .menu .dropdown a:hover,
+html[data-theme="dark"] .menu .dropdown a:focus {
+    background: var(--surface-2);
+    color: var(--gold);
+}
+
+/* Date picker (custom) */
+html[data-theme="dark"] .dp .wd {
+    color: var(--muted);
+}
+
+html[data-theme="dark"] .dp .day:disabled {
+    color: #4b5a50;
+}
+
+/* Recipe / highlight section: dark card with a gold edge instead of a bright yellow block */
 html[data-theme="dark"] .extra {
-    background: #ffd966;
-    color: #121212;
-    border-left-color: #ffffff;
+    background: var(--surface);
+    color: var(--ink);
+    border-left-color: var(--gold);
 }
 
 html[data-theme="dark"] .extra h2,
 html[data-theme="dark"] .extra h3,
 html[data-theme="dark"] .extra p {
-    color: #121212;
-}
-
-html[data-theme="dark"] .extra a:not(.btn) {
-    color: #163d30;
-}
-
-html[data-theme="dark"] .btn.alt,
-html[data-theme="dark"] button.alt {
-    background: #ffd966;
-    color: #121212;
-    border: 2px solid #121212;
+    color: var(--ink);
 }
 
 html[data-theme="dark"] .extra .btn.alt {
-    background: #121212;
-    color: #ffffff;
-    border: 2px solid #121212;
+    background: var(--gold);
+    color: #14201a;
 }
 
-html[data-theme="dark"] .btn.alt:hover,
-html[data-theme="dark"] button.alt:hover {
-    background: #ffe8a3;
-    color: #121212;
+html[data-theme="dark"] .extra .btn.alt:hover {
+    background: #f2c96b;
+    color: #14201a;
 }
 
+/* Social icons */
 html[data-theme="dark"] .social a {
-    background: #ffffff;
-    color: #121212;
-    border: 2px solid #ffffff;
+    background: #e6ebe7;
+    color: #1b4a37;
+    border: 0;
 }
 
 html[data-theme="dark"] .social a:hover,
 html[data-theme="dark"] .social a:focus-visible {
-    background: #ffd966;
-    color: #121212;
-    border-color: #ffd966;
+    background: var(--gold);
+    color: #14201a;
 }
 
-html[data-theme="dark"] .social a svg {
-    stroke: currentColor;
+/* Less glare from pictures */
+html[data-theme="dark"] img {
+    filter: brightness(.92);
 }
 
-
-
+html[data-theme="dark"] ::selection {
+    background: var(--gold);
+    color: #14201a;
+}
 
 
 * {
@@ -1507,9 +1608,9 @@ p.sr, .sr {
 
 /* Dark theme */
 html[data-theme="dark"] #backToTop {
-    background: #ffd966;
-    color: #121212;
-    border-color: #ffffff;
+    background: var(--gold);
+    color: #14201a;
+    border-color: var(--surface);
 }
 
 /* Managing Mobile Responsiveness */
@@ -1568,4 +1669,119 @@ html[data-theme="dark"] #backToTop {
 img {
     max-width: 100%;
     height: auto;
+}
+
+
+/* ===== v4: responsive polish (all pages, especially Home) ===== */
+
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+/* Tablets */
+@media (max-width: 900px) {
+    .hero {
+        margin-top: 2rem;
+        margin-bottom: 3rem;
+    }
+}
+
+/* Phones */
+@media (max-width: 600px) {
+    main {
+        padding: .8rem;
+    }
+
+    .hero {
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+        gap: 1rem;
+    }
+
+    h1 {
+        font-size: 1.7rem;
+    }
+
+    h2 {
+        font-size: 1.35rem;
+    }
+
+    .brand {
+        font-size: 1.15rem;
+    }
+
+    .brand img,
+    .foot img {
+        width: 76px;
+        height: 66px;
+    }
+
+    /* larger tap targets in the header */
+    .menu a {
+        padding: .3rem .2rem;
+    }
+
+    .acc-links {
+        font-size: .85rem;
+    }
+
+    .acc-links a {
+        padding: .2rem 0;
+    }
+
+    .btn {
+        min-height: 40px;
+    }
+
+    .extra {
+        padding: 1rem;
+    }
+
+    .foot .fl {
+        justify-content: center;
+    }
+
+    #backToTop {
+        bottom: 15px;
+        right: 15px;
+        width: 44px;
+        height: 44px;
+    }
+}
+
+/* Small phones: swipe the carousels instead of using the arrows */
+@media (max-width: 480px) {
+    .carousel .arrow {
+        display: none;
+    }
+}
+
+/* Mobile header: logo on the left, theme button on the right */
+@media (max-width: 600px) {
+    .bar {
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .brand {
+        order: 1;
+        margin-right: auto;
+        font-size: 0;
+    }
+
+    .brand img {
+        display: block;
+    }
+
+    #themeToggle {
+        order: 2;
+        margin: 0 0 0 auto;
+        flex-shrink: 0;
+    }
+
+    .menu {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+    }
 }

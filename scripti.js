@@ -1,7 +1,223 @@
-//Each section only runs on its own page (we check for an element that exists only on that page)
+// Each section only runs on the page that has its elements.
+
+// ============================================================
+// Home page: extra function -> recipe   (page has id="recipeToggle")
+// ============================================================
+if (document.getElementById("recipeToggle")) {
+  const recipeToggle = document.getElementById("recipeToggle");
+  const recipe = document.getElementById("recipe");
+
+  recipeToggle.addEventListener("click", function () {
+    recipe.hidden = !recipe.hidden;
+
+    const isExpanded = !recipe.hidden;
+
+    recipeToggle.textContent = isExpanded ? "Hide Recipe" : "View Recipe";
+    recipeToggle.setAttribute("aria-expanded", isExpanded);
+  });
+}
+
+// ============================================================
+// Back to top button   (page has id="backToTop")
+// ============================================================
+if (document.getElementById("backToTop")) {
+  const backToTop = document.getElementById("backToTop");
+
+  window.addEventListener("scroll", function () {
+    if (window.scrollY > 200) {
+      backToTop.style.display = "block";
+    } else {
+      backToTop.style.display = "none";
+    }
+  });
+
+  backToTop.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+}
+// ============================================================
+// Footer clock   (page has id="footerClock")
+// ============================================================
+if (document.getElementById("footerClock")) {
+  function updateClock() {
+    const now = new Date();
+    document.getElementById("footerClock").textContent = now.toLocaleTimeString();
+  }
+
+  updateClock();
+  setInterval(updateClock, 1000);
+}
+
+// ============================================================
+// Home page: extra function -> Contact Us form   (form inside id="contact")
+// ============================================================
+var contactSection = document.getElementById("contact");
+var contactForm = null;
+if (contactSection) {
+  contactForm = contactSection.tagName === "FORM" ? contactSection : contactSection.querySelector("form");
+}
+
+if (contactForm) {
+  var cName = contactForm.querySelector("input[type='text']");
+  var cEmail = contactForm.querySelector("input[type='email']");
+  var cMsg = contactForm.querySelector("textarea");
+
+  contactForm.noValidate = true; // so OUR alert is shown instead of the browser's
+
+  contactForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    var problems = [];
+
+    var nameValue = cName ? cName.value.trim() : "";
+    var emailValue = cEmail ? cEmail.value.trim() : "";
+    var msgValue = cMsg ? cMsg.value.trim() : "";
+
+    // Name: not empty, letters and spaces only
+    if (cName) {
+      if (nameValue === "") {
+        problems.push("- Name is empty.");
+      } else if (!/^\p{L}+(\s+\p{L}+)*$/u.test(nameValue)) {
+        problems.push("- Name must contain letters only (no numbers or symbols).");
+      }
+    }
+
+    // Email: not empty and a valid email
+    if (cEmail) {
+      if (emailValue === "") {
+        problems.push("- Email is empty.");
+      } else if (!cEmail.checkValidity()) {
+        problems.push("- Please enter a valid email (example: name@email.com).");
+      }
+    }
+
+    // Message: not empty and at least 10 characters
+    if (cMsg) {
+      if (msgValue === "") {
+        problems.push("- Message is empty.");
+      } else if (msgValue.length < 10) {
+        problems.push("- Message is too short (at least 10 characters).");
+      }
+    }
+
+    // If something is wrong: show alert and stop
+    if (problems.length > 0) {
+      alert("Please fix the following:\n\n" + problems.join("\n"));
+      return;
+    }
+
+    alert("Thank you, " + nameValue + "! Your message has been sent. We will get back to you soon.");
+    contactForm.reset();
+  });
+}
+
+// ============================================================
+// 3.3 About Us - Join Our Team form   (page has id="joinTeamForm")
+// ============================================================
+if (document.getElementById("joinTeamForm")) {
+ document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("joinTeamForm");
+  if (!form) return;
+  const controls = form.elements;
+  const nameField = controls["name"];
+  const dobField = controls["dob"];
+  const emailField = controls["email"];
+  const photoField = controls["photo"];
+  const skillsField = controls["skills"];
+  const expertiseField = controls["expertise"];
+  const educationField = controls["education"];
+
+  function validateControls() {
+    nameField.setCustomValidity("");
+    dobField.setCustomValidity("");
+    emailField.setCustomValidity("");
+    photoField.setCustomValidity("");
+    skillsField.setCustomValidity("");
+    expertiseField.setCustomValidity("");
+    educationField.setCustomValidity("");
+
+    const nameVal = nameField.value.trim();
+    const dobVal = dobField.value;
+    const emailVal = emailField.value.trim();
+    const skillsVal = skillsField.value.trim();
+    const expertiseVal = expertiseField.value.trim();
+    const educationVal = educationField.value.trim();
+    //checking
+    if (nameVal === "") {
+      nameField.setCustomValidity("Name cannot be empty.");
+    } else if (/^[0-9]/.test(nameVal)) {
+      //cannot start with numbers
+      nameField.setCustomValidity("Name cannot start with a number.");
+    }
+
+    if (dobVal === "") {
+      dobField.setCustomValidity("Date of birth is required.");
+    } else {
+      //must be 2008 or earlier
+      const birthYear = parseInt(dobVal.split("-")[0], 10);
+      if (isNaN(birthYear) || birthYear > 2008) {
+        dobField.setCustomValidity("Year of birth must be 2008 or earlier.");
+      }
+    }
+
+    if (emailVal === "") {
+      emailField.setCustomValidity("Email cannot be empty.");
+    } else if (emailField.validity.typeMismatch) {
+      emailField.setCustomValidity("Please enter a valid email address.");
+    }
+
+    if (photoField.files.length === 0) {
+      photoField.setCustomValidity("Please select a photo.");
+    } else {
+      //photo accepts only images
+      const file = photoField.files[0];
+      const validExt = /\.(jpg|jpeg|png|gif|webp|svg|bmp)$/i;
+      const isImage =(file.type && file.type.startsWith("image/")) || validExt.test(file.name);
+      if (!isImage) {
+        photoField.setCustomValidity("Only image files are allowed.");
+      }
+    }
+
+    if (skillsVal === "") {
+      skillsField.setCustomValidity("Skills cannot be empty.");
+    }
+
+    if (expertiseVal === "") {
+      expertiseField.setCustomValidity("Please select an area of expertise.");
+    }
+
+    if (educationVal === "") {
+      educationField.setCustomValidity("Education cannot be empty.");
+    }
+    return form.reportValidity();
+  }
+  //clear custom errors while typing/changing fields
+  for (let i = 0; i < controls.length; i++) {
+    const el = controls[i];
+    if (el.tagName === "BUTTON") continue;
+    el.addEventListener("input", function () {
+      el.setCustomValidity("");
+    });
+    el.addEventListener("change", function () {
+      el.setCustomValidity("");
+    });
+  }
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    if (!validateControls()) {
+      return;
+    }
+
+    //Confirmation alert 
+    alert("Thank you, " + nameField.value.trim() + "! Your application has been submitted.");
+    form.reset();
+  });
+});
+}
 
 // ============================================================
 // 3.4 Request to Join an Offering JS   (page has id="of")
+// ============================================================
 if (document.getElementById("of")) {
 
   var form = document.querySelector("form");
@@ -308,7 +524,6 @@ if (document.getElementById("instructorList")) {
   var deleteForm = document.getElementById("deleteForm");
   var addForm = document.getElementById("addForm");
 
-  //draw one card (with a checkbox) for every person in the array
   function showPeople() {
     list.innerHTML = "";
     for (var i = 0; i < people.length; i++) {
@@ -329,7 +544,7 @@ if (document.getElementById("instructorList")) {
 
       var acts = document.createElement("div");
       acts.className = "acts";
-      if (p.profile) {   //new people have no profile page (not required)
+      if (p.profile) {   //new people have no profile page -> not required)
         var link = document.createElement("a");
         link.className = "btn small";
         link.href = p.profile;
@@ -342,7 +557,7 @@ if (document.getElementById("instructorList")) {
       var box = document.createElement("input");
       box.type = "checkbox";
       box.name = "remove";
-      box.value = i; //the position of this person in the array
+      box.value = i; 
       label.appendChild(box);
       label.appendChild(document.createTextNode(" Select"));
       acts.appendChild(label);
@@ -358,7 +573,7 @@ if (document.getElementById("instructorList")) {
   }
   showPeople();
 
-  // ---------- Delete ----------
+  //DELETE
   deleteForm.addEventListener("submit", function (event) {
     event.preventDefault();
     var checked = list.querySelectorAll("input[name='remove']:checked");
@@ -372,7 +587,6 @@ if (document.getElementById("instructorList")) {
     if (!ok) {
       return;
     }
-
     //keep only the people who were NOT checked
     var toDelete = [];
     for (var i = 0; i < checked.length; i++) {
@@ -384,7 +598,7 @@ if (document.getElementById("instructorList")) {
     showPeople();
   });
 
-  // ---------- Add ----------
+  //ADD
   addForm.noValidate = true; //we show our own alert instead of the browser messages
 
   addForm.addEventListener("submit", function (event) {
@@ -397,6 +611,7 @@ if (document.getElementById("instructorList")) {
     var emailInput = document.getElementById("ae");
     var expertise = document.getElementById("ax").value;
     var photo = document.getElementById("ap").files[0];
+	var education = document.getElementById("aed").value.trim();
 
     //empty fields
     if (name === "") problems.push("- Name is empty.");
@@ -404,13 +619,14 @@ if (document.getElementById("instructorList")) {
     if (skills === "") problems.push("- Skills is empty.");
     if (emailInput.value.trim() === "") problems.push("- Email is empty.");
     if (expertise === "") problems.push("- Please select an area of expertise.");
+	if (education === "") problems.push("- Education is empty.");
+	if (!photo) problems.push("- Profile Picture is empty.");
 
-    //information type
     if (name !== "" && !/^\p{L}+(\s+\p{L}+)+$/u.test(name)) {
       problems.push("- Name must be a full name with letters only (no numbers or symbols).");
     }
-    if (dob !== "" && new Date(dob + "T00:00:00") >= new Date()) {
-      problems.push("- Date of Birth must be in the past.");
+    if (dob !== "" && new Date(dob + "T00:00:00") >= new Date("2008-12-31T00:00:00")) {
+      problems.push("- Date of Birth must be earlier than 2008-12-31.");
     }
     if (emailInput.value.trim() !== "" && !emailInput.checkValidity()) {
       problems.push("- Email is not valid (example: name@email.com).");
@@ -423,8 +639,7 @@ if (document.getElementById("instructorList")) {
       alert("Please fix the following:\n\n" + problems.join("\n"));
       return;
     }
-
-    //valid: add the new person to the array and redraw the list
+    //valid
     people.push({
       name: name,
       role: "Cooking Instructor",
@@ -438,3 +653,5 @@ if (document.getElementById("instructorList")) {
     addForm.reset();
   });
 }
+
+

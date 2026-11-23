@@ -7,17 +7,17 @@
    Home | Flavora
   </title>
   <link href="style.css" rel="stylesheet">
-  <script src="theme.js" defer></script>
+  <script src="theme.js"></script>
  </head>
  <body>
-  <button id="themeToggle" type="button" onclick="toggleTheme()">
-    Switch to Dark Theme
-</button>
   <header class="bar">
    <a class="brand" href="index.html">
     <img alt="Flavora logo" src="images/flavora-logo.jpg">
     Flavora
    </a>
+   <button id="themeToggle" type="button" onclick="toggleTheme()">
+    Switch to Dark Theme
+   </button>
    <nav aria-label="Main" class="menu">
     <a aria-current="page" href="index.html">
      Home
@@ -250,6 +250,7 @@
      All rights reserved.
     </p>
    </div>
+   <b><p id="footerClock"></p></b>
    <div class="fr">
     <p class="flinks">
      <a href="about.html">
@@ -302,63 +303,11 @@
      </a>
     </div>
    </div>
-   <p id="footerClock"></p>
   </footer>
-  
-<script>
-    const recipeToggle = document.getElementById("recipeToggle");
-    const recipe = document.getElementById("recipe");
-
-    recipeToggle.addEventListener("click", function () {
-        recipe.hidden = !recipe.hidden;
-
-        const isExpanded = !recipe.hidden;
-
-        recipeToggle.textContent = isExpanded
-            ? "Hide Recipe"
-            : "View Recipe";
-
-        recipeToggle.setAttribute("aria-expanded", isExpanded);
-    });
-</script>
 
 <button id="backToTop" type="button" aria-label="Back to top">
     ↑
 </button>
-
-
-
-<script>
-    const backToTop = document.getElementById("backToTop");
-
-    window.addEventListener("scroll", function () {
-        if (window.scrollY > 200) {
-            backToTop.style.display = "block";
-        } else {
-            backToTop.style.display = "none";
-        }
-    });
-
-    backToTop.addEventListener("click", function () {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-    });
-</script>
-
-
-<script>
-    function updateClock() {
-        const now = new Date();
-
-        document.getElementById("footerClock").textContent =
-            now.toLocaleTimeString();
-    }
-
-    updateClock();
-    setInterval(updateClock, 1000);
-</script>
-
+  <script src="scripti.js"></script>
  </body>
 </html>

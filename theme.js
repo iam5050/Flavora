@@ -1,33 +1,59 @@
+(function () {
+  var KEY = "flavoraTheme";
 
-const savedTheme = localStorage.getItem("flavoraTheme") || "light";
+  function savedTheme() {
+    try {
+      return localStorage.getItem(KEY) === "dark" ? "dark" : "light";
+    } catch (e) {
+      return "light";
+    }
+  }
 
-document.documentElement.setAttribute("data-theme", savedTheme);
+  function currentTheme() {
+    return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+  }
 
-function toggleTheme() {
-    const currentTheme = document.documentElement.getAttribute("data-theme");
+  function updateButton() {
+    var btn = document.getElementById("themeToggle");
+    if (btn) {
+      btn.textContent = currentTheme() === "dark" ? "Switch to Light Theme" : "Switch to Dark Theme";
+    }
+  }
 
-    const newTheme = currentTheme === "dark" ? "light" : "dark";
+  function setTheme(theme) {
+    document.documentElement.setAttribute("data-theme", theme);
+    try {
+      localStorage.setItem(KEY, theme);
+    } catch (e) {}
+    updateButton();
+  }
 
-    document.documentElement.setAttribute("data-theme", newTheme);
+  document.documentElement.setAttribute("data-theme", savedTheme());
+  window.toggleTheme = function () {
+    setTheme(currentTheme() === "dark" ? "light" : "dark");
+  };
 
-    localStorage.setItem("flavoraTheme", newTheme);
+  function init() {
+    var btn = document.getElementById("themeToggle");
+
+    // Only keep the button if it already exists in the HTML
+    if (btn) {
+        if (!btn.hasAttribute("onclick")) {
+            btn.addEventListener("click", window.toggleTheme);
+        }
+        updateButton();
+    }
 }
 
-
-
-document.addEventListener("DOMContentLoaded", function () {
-    const themeButton = document.getElementById("themeToggle");
-
-    if (themeButton) {
-        function updateButtonText() {
-            const theme = document.documentElement.getAttribute("data-theme");
-
-            themeButton.textContent = theme === "dark"
-                ? "Switch to Light Theme"
-                : "Switch to Dark Theme";
-        }
-
-        themeButton.addEventListener("click", updateButtonText);
-        updateButtonText();
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+  window.addEventListener("storage", function (e) {
+    if (e.key === KEY) {
+      document.documentElement.setAttribute("data-theme", savedTheme());
+      updateButton();
     }
-});
+  });
+})();

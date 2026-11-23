@@ -222,18 +222,11 @@
        <label for="jn">
         Name*
        </label>
-       <input id="jn" name="name"
-	   placeholder="Enter your full name here."
-       type="text" required
-       pattern="^[^0-9].*"
-       title="Name cannot start with a number">
+       <input id="jn" name="name"  placeholder="Enter your full name here." type="text" required="">
        <label for="jd">
         Date of Birth*
        </label>
-       <input autocomplete="off" class="date" data-fmt="dmy"
-       id="jd" name="dob" required
-       title="Date of birth must be in 2008 or earlier"
-       max="2008-12-31" type="date">
+       <input autocomplete="off" class="date" data-fmt="dmy" id="jd" name="dob" required="" type="date">
        <label for="je">
         Email*
        </label>
@@ -245,7 +238,7 @@
         <span>
          + Upload Image
         </span>
-        <input accept="image/*" id="jp" name="photo" required="" type="file">
+        <input id="jp" name="photo" required="" type="file">
        </div>
       </div>
       <div class="col">
@@ -349,48 +342,6 @@
     </div>
    </div>
   </footer>
-  
-<script>
-    const joinTeamForm = document.getElementById("joinTeamForm");
-
-    joinTeamForm.addEventListener("submit", function(event) {
-        event.preventDefault();
-
-        // 1) Specialized form controls (required, pattern, max, accept)
-        if (!joinTeamForm.checkValidity()) {
-            joinTeamForm.reportValidity();
-            return;
-        }
-
-        const name = document.getElementById("jn").value.trim();
-        const dob = document.getElementById("jd").value;
-        const photo = document.getElementById("jp").files[0];
-
-        // 2) Extra JavaScript checks (in case the browser skips one)
-        const skills = document.getElementById("js").value.trim();
-        const education = document.getElementById("jed").value.trim();
-        if (name === "" || skills === "" || education === "") {
-            alert("Please fill in all fields (spaces only are not accepted).");
-            return;
-        }
-        if (/^[0-9]/.test(name)) {
-            alert("Name cannot start with a number.");
-            return;
-        }
-        if (!photo || !photo.type.startsWith("image/")) {
-            alert("Profile Picture must be an image file.");
-            return;
-        }
-        if (Number(dob.split("-")[0]) > 2008) {
-            alert("Year of birth must be 2008 or earlier.");
-            return;
-        }
-
-        alert("Thank you, " + name + "! Your application has been submitted successfully.");
-
-        joinTeamForm.reset();
-    });
-</script>
-
+  <script src="scripti.js"></script>
  </body>
 </html>
